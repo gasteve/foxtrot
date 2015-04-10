@@ -30,7 +30,7 @@ foxtrot.options = {
       seek: serverPort ? false : true,
     },
     file: {},
-    dnsseed: {},
+//    dnsseed: {},
     zeroconf: {},
     rumor: {},
     reconnect: {},

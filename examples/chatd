@@ -28,7 +28,7 @@ foxtrot.options = {
       seek: serverPort ? false : true,
     },
     file: {},
-    dnsseed: {},
+//    dnsseed: {},
     zeroconf: {
       discover: true,
       advertise: true,
@@ -45,7 +45,7 @@ foxtrot.on('peerDisconnect', function(peer) {
   console.log('>>> disconnected from peer ('+peer.descriptorString()+')');
 });
 
-var Key = require('bitcore').Key;
+var PrivateKey = require('bitcore').PrivateKey;
 var tracer = require('./tracer')(console);
 var chatClients = [];
 
@@ -70,12 +70,12 @@ var localSocket = {
 };
 
 // setup a chat server on a foxtrot endpoint
-var identity = Key.generateSync();
+var identity = PrivateKey();
 if (program.key) {
   identity.private = new Buffer(program.key, 'hex');
   identity.regenerateSync();
 }
-console.log('>>> chat server listening on '+identity.public.toString('hex'));
+console.log('>>> chat server listening on '+identity.publicKey.toString('hex'));
 process.stdin.pipe(localSocket);
 var server = foxtrot.createServer({
   key: identity,
